@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francisco Urbina | Portal Personal & Hardware Tech</title>
+    <!-- Tipografías Técnicas y Editoriales de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-carbon: #0b0d12;
+            --bg-panel: #12161f;
+            --bg-card: #181d29;
+            --accent-red: #e11d48;
+            --accent-amber: #f59e0b;
+            --accent-cyan: #0ea5e9;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-tech: rgba(148, 163, 184, 0.14);
+            --border-highlight: rgba(225, 29, 72, 0.45);
+            --shadow-deep: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-carbon);
+            background-image: 
+                radial-gradient(circle at 12% 10%, rgba(225, 29, 72, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 88% 25%, rgba(14, 165, 233, 0.1) 0%, transparent 40%),
+                linear-gradient(180deg, rgba(18, 22, 31, 0.4) 0%, rgba(11, 13, 18, 1) 100%);
+            color: var(--text-primary);
+            line-height: 1.75;
+            padding-bottom: 4.5rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Barra de Navegación Superior Estilo Telemetría */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 13, 18, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-tech);
+            padding: 0.95rem 2rem;
+        }
+
+        .navbar-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-chip {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: linear-gradient(135deg, var(--accent-red), #9f1239);
+            color: #ffffff;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            transition: color 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 2.8rem auto 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Portada Principal (Hero) */
+        header {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-tech);
+            border-radius: 26px;
+            padding: 3.8rem 3rem 3.2rem 3rem;
+            text-align: center;
+            box-shadow: var(--shadow-deep);
+            margin-bottom: 2.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-amber), var(--accent-cyan));
+        }
+
+        .tech-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--accent-cyan);
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            margin-bottom: 1.2rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        /* Jerarquía de Encabezados (h1 - h6) */
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 0.65rem;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 0.75rem;
+        }
+
+        .sec-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            background: rgba(225, 29, 72, 0.12);
+            border: 1px solid var(--border-highlight);
+            padding: 0.2rem 0.65rem;
+            border-radius: 6px;
+        }
+
+        h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.45rem;
+        }
+
+        h5 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        h6 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Etiquetas de Especialidades en Portada */
+        .specs-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.7rem;
+            max-width: 880px;
+            margin: 0 auto;
+        }
+
+        .spec-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border-tech);
+            color: var(--text-secondary);
+            padding: 0.48rem 1.1rem;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .spec-pill.highlight {
+            background: rgba(225, 29, 72, 0.15);
+            border-color: var(--border-highlight);
+            color: #ffffff;
+        }
+
+        /* Tarjetas de Sección */
+        section {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-tech);
+            border-radius: 24px;
+            padding: 2.8rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-deep);
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .tech-callout {
+            background: linear-gradient(90deg, rgba(225, 29, 72, 0.1) 0%, rgba(24, 29, 41, 0.6) 100%);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-red);
+            padding: 1.4rem 1.8rem;
+            border-radius: 0 16px 16px 0;
+            margin-top: 1.2rem;
+        }
+
+        .tech-callout p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Cuadrícula de Intereses y Habilidades */
+        .grid-listas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-top: 1.4rem;
+        }
+
+        .card-box {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 18px;
+            border: 1px solid var(--border-tech);
+            position: relative;
+        }
+
+        .card-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-cyan));
+            border-radius: 18px 18px 0 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            position: relative;
+            background: rgba(11, 13, 18, 0.65);
+            border: 1px solid var(--border-tech);
+            padding: 0.85rem 1.1rem 0.85rem 2.3rem;
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+        }
+
+        ul li:hover {
+            border-color: var(--accent-red);
+            color: var(--text-primary);
+            transform: translateX(5px);
+        }
+
+        /* Viñeta técnica hexagonal/geométrica */
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 0.95rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-red);
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        }
+
+        /* Vitrina Multimedia y Enlaces */
+        .showcase-panel {
+            background: var(--bg-card);
+            padding: 2.4rem 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-tech);
+            text-align: center;
+            margin-top: 1.6rem;
+        }
+
+        .trio-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 0.6rem 0 1.8rem 0;
+        }
+
+        .trio-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 0.35rem 1rem;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(11, 13, 18, 0.8);
+            border: 1px solid var(--border-tech);
+            color: var(--text-primary);
+        }
+
+        .trio-pill.saitama { border-color: var(--accent-amber); color: #fde68a; }
+        .trio-pill.kratos { border-color: var(--accent-red); color: #fecdd3; }
+        .trio-pill.cr7 { border-color: #22c55e; color: #bbf7d0; }
+
+        .image-frame {
+            max-width: 820px;
+            margin: 0 auto 1.2rem auto;
+            background: var(--bg-carbon);
+            padding: 10px;
+            border-radius: 18px;
+            border: 1px solid var(--border-tech);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+        }
+
+        .main-illustration {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .silent-loader {
+            padding: 2.5rem 1.5rem;
+            border: 1px dashed var(--accent-red);
+            border-radius: 12px;
+            background: rgba(225, 29, 72, 0.06);
+            cursor: pointer;
+            transition: background 0.25s ease;
+        }
+
+        .silent-loader:hover {
+            background: rgba(225, 29, 72, 0.14);
+        }
+
+        .silent-loader span {
+            display: inline-block;
+            background: var(--accent-red);
+            color: #ffffff;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin-top: 0.6rem;
+        }
+
+        .caption-bar {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            margin-bottom: 1.8rem;
+        }
+
+        /* Botonera de Sitios Favoritos */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.2rem;
+        }
+
+        .btn-tech {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-panel);
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-tech);
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.25s ease;
+        }
+
+        .btn-tech:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            border-color: var(--accent-red);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(225, 29, 72, 0.3);
+        }
+
+        .btn-tech.github-primary {
+            border-color: var(--accent-cyan);
+            background: rgba(14, 165, 233, 0.12);
+        }
+
+        .btn-tech.github-primary:hover {
+            background: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            color: #0b0d12;
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.35);
+        }
+
+        footer {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-tech);
+            border-radius: 20px;
+            padding: 2.2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-inner {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            section, header {
+                padding: 2rem 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegación Superior -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="nav-brand">
+                <span class="brand-chip">SYS // JUM</span>
+                <span>Francisco Urbina</span>
+            </div>
+            <div class="nav-links">
+                <a href="#presentacion">Presentación</a>
+                <a href="#intereses-habilidades">Hardware & Habilidades</a>
+                <a href="#favoritos">Galería & Enlaces</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 1. Encabezado Principal con Nombre (h1, h4, h5) -->
+        <header>
+            <div class="tech-status">
+                <span class="status-dot"></span>
+                <span>SYSTEM ARCHITECTURE &bull; FRONTEND PORTAL</span>
+            </div>
+
+            <h4>Ingeniería de Sistemas &bull; Diseño de Sistemas en Internet</h4>
+            <h1>Francisco Javier Urbina Mejía</h1>
+            <h5>24 Años &bull; GitHub: @Francisco-JUM &bull; Repositorio: frontendFranciscoJUM</h5>
+
+            <div class="specs-bar">
+                <span class="spec-pill highlight">Hardware & Ensamblaje de PC</span>
+                <span class="spec-pill highlight">Desarrollo de Software & Programación</span>
+                <span class="spec-pill">Especificaciones Técnicas & Benchmarking</span>
+                <span class="spec-pill">Reparación de Equipos & Electrónica</span>
+                <span class="spec-pill">Ingeniería Automotriz</span>
+                <span class="spec-pill">Gaming & Fútbol</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- 2. Párrafo de Presentación Personal (h2, p) -->
+            <section id="presentacion">
+                <h2><span class="sec-tag">01</span> Presentación Personal</h2>
+                <p>
+                    ¡Hola! Mi nombre es Francisco, tengo 24 años y soy un apasionado por la ingeniería informática, la arquitectura de computadoras y el desarrollo de software. Desde siempre me ha fascinado comprender a fondo cómo funcionan las máquinas por dentro: desde analizar las especificaciones técnicas más detalladas de procesadores, tarjetas gráficas, memorias de alta frecuencia y dispositivos móviles, hasta programar soluciones funcionales y optimizar cada componente al máximo rendimiento.
+                </p>
+                <div class="tech-callout">
+                    <p>
+                        Me caracterizo por tener una mentalidad práctica, analítica y totalmente autodidacta. Disfruto tanto del desarrollo de código como del trabajo técnico manual: armar computadoras de alto desempeño, diagnosticar y reparar laptops, teléfonos celulares, relojes y diversos dispositivos electrónicos, combinando esa pasión tecnológica con mi gusto por el fútbol, los videojuegos y el mundo automotriz.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3. Lista de Intereses y Habilidades (h2, h3, ul, li) -->
+            <section id="intereses-habilidades">
+                <h2><span class="sec-tag">02</span> Intereses y Habilidades Técnicas</h2>
+                <div class="grid-listas">
+                    <div class="card-box">
+                        <h3>Mis Intereses</h3>
+                        <ul>
+                            <li>Componentes de computadora, hardware entusiasta y ajuste de rendimiento.</li>
+                            <li>Análisis profundo de especificaciones técnicas, celulares e innovación tecnológica.</li>
+                            <li>Programación, arquitectura de sistemas y desarrollo de aplicaciones.</li>
+                            <li>El fútbol internacional y la trayectoria deportiva de Cristiano Ronaldo.</li>
+                            <li>Ingeniería automotriz, mecánica y especificaciones de autos deportivos.</li>
+                            <li>Videojuegos de acción como God of War y el anime como One Punch Man (Saitama).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-box">
+                        <h3>Mis Habilidades</h3>
+                        <ul>
+                            <li>Aprendizaje rápido y 100% autodidacta, especialmente en el área informática.</li>
+                            <li>Ensamblaje, configuración y optimización avanzada de PCs de escritorio.</li>
+                            <li>Diagnóstico, mantenimiento y reparación de laptops, celulares, relojes y electrónica.</li>
+                            <li>Lógica de programación, resolución de problemas técnicos y estructuración web HTML.</li>
+                            <li>Evaluación comparativa de hardware, periféricos y arquitecturas tecnológicas.</li>
+                            <li>Capacidad práctica para desarmar, comprender y restaurar mecanismos complejos.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Imagen y Enlaces a Redes o Sitios Favoritos (h2, h3, p, img, a) -->
+            <section id="favoritos">
+                <h2><span class="sec-tag">03</span> Mis Sitios Favoritos y Galería</h2>
+                <p>
+                    En mi tiempo libre me encanta mantenerme al día en portales especializados sobre lo último en tecnología, lanzamientos de hardware, telefonía móvil y fichas técnicas de automóviles. Además, esta ilustración reúne en una sola escena tres de mis grandes referentes de entretenimiento y deporte: el anime de Saitama (One Punch Man), la saga God of War (Kratos) y el fútbol con Cristiano Ronaldo.
+                </p>
+
+                <div class="showcase-panel">
+                    <h3 style="justify-content: center;">Crossover Favorito: Anime, Gaming & Fútbol</h3>
+
+                    <div class="trio-badges">
+                        <span class="trio-pill saitama">Saitama &bull; One Punch Man</span>
+                        <span class="trio-pill kratos">Kratos &bull; God of War</span>
+                        <span class="trio-pill cr7">Cristiano Ronaldo &bull; CR7</span>
+                    </div>
+
+                    <!-- Marco de la Imagen -->
+                    <div class="image-frame">
+                        <img id="img-francisco" class="main-illustration" alt="Ilustración de Saitama, Kratos y Cristiano Ronaldo jugando videojuegos en el sofá" style="display: none;" title="Haz clic en la imagen si deseas cambiarla">
+                        
+                        <div id="selector-francisco" class="silent-loader" onclick="document.getElementById('file-francisco').click()">
+                            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 0.3rem; color: #f8fafc;">
+                                Haz clic aquí para cargar la imagen de Saitama, Kratos y Cristiano Ronaldo
+                            </p>
+                            <span>Seleccionar Imagen desde mi PC</span>
+                        </div>
+                    </div>
+                    <input type="file" id="file-francisco" accept="image/*" style="display: none;">
+
+                    <div class="caption-bar">
+                        [ SESSIÓN GAMING // SAITAMA &bull; KRATOS &bull; CRISTIANO RONALDO ]
+                    </div>
+
+                    <div class="links-grid">
+                        <!-- Enlace directo al repositorio de Francisco-JUM -->
+                        <a href="https://github.com/Francisco-JUM/frontendFranciscoJUM" target="_blank" rel="noopener noreferrer" class="btn-tech github-primary">
+                            Mi GitHub (Francisco-JUM)
+                        </a>
+                        <a href="https://www.techpowerup.com/" target="_blank" rel="noopener noreferrer" class="btn-tech">
+                            TechPowerUp (Hardware & GPU Specs)
+                        </a>
+                        <a href="https://www.gsmarena.com/" target="_blank" rel="noopener noreferrer" class="btn-tech">
+                            GSMArena (Especificaciones Móviles)
+                        </a>
+                        <a href="https://es.motor1.com/" target="_blank" rel="noopener noreferrer" class="btn-tech">
+                            Motor1 (Ingeniería & Autos)
+                        </a>
+                        <a href="https://www.playstation.com/es-ni/god-of-war/" target="_blank" rel="noopener noreferrer" class="btn-tech">
+                            God of War (Portal Oficial)
+                        </a>
+                        <a href="https://www.transfermarkt.es/cristiano-ronaldo/profil/spieler/8198" target="_blank" rel="noopener noreferrer" class="btn-tech">
+                            Cristiano Ronaldo (Estadísticas CR7)
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pie de Página con Etiqueta h6 -->
+        <footer>
+            <h6>Diseño de Sistemas en Internet &bull; Taller Práctico HTML5 &bull; Francisco Javier Urbina Mejía (2026)</h6>
+        </footer>
+    </div>
+
+    <script>
+        (function() {
+            const imgEl = document.getElementById('img-francisco');
+            const selEl = document.getElementById('selector-francisco');
+            const inputEl = document.getElementById('file-francisco');
+            const storageKey = 'francisco_jum_portal_img_v1';
+
+            // Lista de posibles nombres en la carpeta (incluyendo el nombre original de WhatsApp)
+            const posiblesArchivos = [
+                'francisco.jpg',
+                'francisco.jpeg',
+                'francisco.png',
+                'francisco.jpg.jpg',
+                'imagen.jpg',
+                'imagen.jpeg',
+                'portada.jpg',
+                'WhatsApp Image 2026-10-17 at 10.12.57 PM.jpeg',
+                'WhatsApp Image 2026-10-17 at 10.12.57 PM.jpg'
+            ];
+
+            function mostrarImagen(src) {
+                imgEl.src = src;
+                imgEl.style.display = 'block';
+                selEl.style.display = 'none';
+            }
+
+            const guardada = localStorage.getItem(storageKey);
+            if (guardada) {
+                mostrarImagen(guardada);
+            } else {
+                let idx = 0;
+                function buscarEnCarpeta() {
+                    if (idx >= posiblesArchivos.length) {
+                        imgEl.style.display = 'none';
+                        selEl.style.display = 'block';
+                        return;
+                    }
+                    const tester = new Image();
+                    tester.onload = function() { mostrarImagen(posiblesArchivos[idx]); };
+                    tester.onerror = function() { idx++; buscarEnCarpeta(); };
+                    tester.src = posiblesArchivos[idx];
+                }
+                buscarEnCarpeta();
+            }
+
+            imgEl.addEventListener('click', function() {
+                inputEl.click();
+            });
+
+            inputEl.addEventListener('change', function(e) {
+                const archivo = e.target.files[0];
+                if (!archivo) return;
+                const lector = new FileReader();
+                lector.onload = function(evt) {
+                    mostrarImagen(evt.target.result);
+                    try {
+                        localStorage.setItem(storageKey, evt.target.result);
+                    } catch (err) {}
+                };
+                lector.readAsDataURL(archivo);
+            });
+        })();
+    </script>
+</body>
+</html>
